@@ -87,12 +87,26 @@ export class StudioScrollBar extends Roact.Component<IStudioScrollBarProperties,
 					Position={trackPosition}
 					Size={trackSize}
 					Event={{
-						InputBegan: (instance, inputObject) => {
+						InputBegan: (instance: Frame, a: unknown) => {
+							// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+							const inputObject = a as InputObject;
+							assert(
+								typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+								"inputObject is not a InputObject...",
+							);
+
 							if (inputObject.UserInputType === Enum.UserInputType.MouseButton1) {
 								this.handleTrackPressStarted(instance, inputObject);
 							}
 						},
-						InputEnded: (instance, inputObject) => {
+						InputEnded: (instance: Frame, a: unknown) => {
+							// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+							const inputObject = a as InputObject;
+							assert(
+								typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+								"inputObject is not a InputObject...",
+							);
+
 							if (
 								inputObject.UserInputType === Enum.UserInputType.MouseButton1 ||
 								inputObject.UserInputType === Enum.UserInputType.MouseMovement
@@ -112,7 +126,14 @@ export class StudioScrollBar extends Roact.Component<IStudioScrollBarProperties,
 						Position={gripPosition}
 						Size={gripSize}
 						Event={{
-							InputBegan: (instance, inputObject) => {
+							InputBegan: (instance: Frame, a: unknown) => {
+								// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+								const inputObject = a as InputObject;
+								assert(
+									typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+									"inputObject is not a InputObject...",
+								);
+
 								if (inputObject.UserInputType === Enum.UserInputType.MouseButton1) {
 									this.setState({
 										IsGripBeingDragged: true,
@@ -135,7 +156,14 @@ export class StudioScrollBar extends Roact.Component<IStudioScrollBarProperties,
 					Position={new UDim2(0, 0, 0, 0)}
 					Size={new UDim2(1, 0, 1, 0)}
 					Event={{
-						InputChanged: (instance, inputObject) => {
+						InputChanged: (instance: Frame, a: unknown) => {
+							// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+							const inputObject = a as InputObject;
+							assert(
+								typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+								"inputObject is not a InputObject...",
+							);
+
 							if (!this.state.IsGripBeingDragged) {
 								return;
 							}
@@ -159,7 +187,14 @@ export class StudioScrollBar extends Roact.Component<IStudioScrollBarProperties,
 							this.props.ScollGripDragged(trackLengthPercentageTraveled);
 						},
 
-						InputEnded: (instance, inputObject) => {
+						InputEnded: (instance: Frame, a: unknown) => {
+							// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+							const inputObject = a as InputObject;
+							assert(
+								typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+								"inputObject is not a InputObject...",
+							);
+
 							if (!this.state.IsGripBeingDragged) {
 								return;
 							}

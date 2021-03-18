@@ -51,7 +51,14 @@ export class StudioTextLabel extends Roact.Component<IStudioTextLabelProperties,
 				TextYAlignment={Enum.TextYAlignment.Center}
 				Visible={props.Visible}
 				Event={{
-					InputBegan: (instance, inputObject) => {
+					InputBegan: (instance: TextLabel, a: unknown) => {
+						// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+						const inputObject = a as InputObject;
+						assert(
+							typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+							"inputObject is not a InputObject...",
+						);
+
 						if (inputObject.UserInputType === Enum.UserInputType.MouseButton1) {
 							if (this.props.Events !== undefined && this.props.Events.MouseButton1Down !== undefined) {
 								this.props.Events.MouseButton1Down();

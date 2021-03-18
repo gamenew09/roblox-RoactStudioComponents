@@ -195,7 +195,14 @@ export class StudioScrollingFrame extends Roact.Component<IStudioScrollingFrameP
 				Size={props.Size}
 				Visible={props.Visible}
 				Event={{
-					InputChanged: (instance, inputObject) => {
+					InputChanged: (inst: Frame, a: unknown) => {
+						// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+						const inputObject = a as InputObject;
+						assert(
+							typeOf(inputObject) === "Instance" && inputObject.IsA("InputObject"),
+							"inputObject is not a InputObject...",
+						);
+
 						if (inputObject.UserInputType === Enum.UserInputType.MouseWheel) {
 							const isVerticalScroll = inputObject.IsModifierKeyDown(0) !== true;
 							if (isVerticalScroll && !isVerticalScrollbarVisible) {
